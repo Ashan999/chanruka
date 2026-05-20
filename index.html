@@ -3,475 +3,285 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sri Lanka Police</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Sri Lanka Police — 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0a1628;
-    --royal: #1a3a6b;
-    --gold: #c8a84b;
-    --gold-light: #e8c96e;
-    --cream: #f5f0e8;
-    --white: #ffffff;
-    --gray: #6b7280;
-    --light-gray: #f3f4f6;
-    --red: #c0392b;
-  }
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#020b18;
+  --bg2:#040f1f;
+  --panel:#06152a;
+  --panel2:#081a35;
+  --cyan:#00d4ff;
+  --cyan2:#00a8cc;
+  --gold:#f0b429;
+  --gold2:#d4952a;
+  --red:#ff3b3b;
+  --green:#00e676;
+  --white:#e8f4ff;
+  --muted:rgba(200,230,255,0.45);
+  --border:rgba(0,212,255,0.15);
+  --border2:rgba(0,212,255,0.3);
+  --glow:0 0 20px rgba(0,212,255,0.2);
+}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;min-height:100vh;}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* SCANLINE OVERLAY */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999;}
 
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: var(--cream);
-    color: var(--navy);
-    overflow-x: hidden;
-  }
+/* GRID BACKGROUND */
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
 
-  /* ── TOP BAR ── */
-  .top-bar {
-    background: var(--navy);
-    color: rgba(255,255,255,0.7);
-    font-size: 12px;
-    padding: 6px 0;
-    letter-spacing: 0.05em;
-  }
-  .top-bar .inner {
-    max-width: 1280px; margin: auto; padding: 0 32px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .top-bar a { color: var(--gold); text-decoration: none; }
-  .top-bar a:hover { color: var(--gold-light); }
+/* CORNER BRACKETS */
+.bracket{position:absolute;width:16px;height:16px;border-color:var(--cyan);border-style:solid;opacity:0.6;}
+.bracket-tl{top:8px;left:8px;border-width:2px 0 0 2px;}
+.bracket-tr{top:8px;right:8px;border-width:2px 2px 0 0;}
+.bracket-bl{bottom:8px;left:8px;border-width:0 0 2px 2px;}
+.bracket-br{bottom:8px;right:8px;border-width:0 2px 2px 0;}
 
-  /* ── HEADER ── */
-  header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 60%, #0d2952 100%);
-    padding: 24px 0 0;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a84b' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-  }
-  .header-inner {
-    max-width: 1280px; margin: auto; padding: 0 32px;
-    display: flex; align-items: center; gap: 28px;
-  }
-  .logo-emblem {
-    width: 88px; height: 88px;
-    background: radial-gradient(circle, var(--gold) 0%, #a07830 100%);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 0 0 4px rgba(200,168,75,0.3), 0 8px 24px rgba(0,0,0,0.4);
-    font-size: 42px;
-  }
-  .header-text { flex: 1; }
-  .header-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px; font-weight: 900;
-    color: var(--white);
-    letter-spacing: 0.02em;
-    line-height: 1.1;
-  }
-  .header-text .sub {
-    color: var(--gold);
-    font-size: 13px; letter-spacing: 0.2em;
-    text-transform: uppercase; margin-top: 4px;
-    font-weight: 600;
-  }
-  .header-text .sinhala {
-    color: rgba(255,255,255,0.55);
-    font-size: 14px; margin-top: 2px;
-  }
-  .header-right {
-    display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
-  }
-  .emergency-btn {
-    background: var(--red);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: flex; align-items: center; gap-x: 8px;
-    box-shadow: 0 4px 12px rgba(192,57,43,0.4);
-    transition: all 0.2s;
-  }
-  .emergency-btn:hover { background: #a93226; transform: translateY(-1px); }
-  .search-bar {
-    display: flex; gap: 0;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(200,168,75,0.4);
-    border-radius: 4px; overflow: hidden;
-  }
-  .search-bar input {
-    background: transparent; border: none; outline: none;
-    color: white; padding: 8px 16px; font-size: 13px; width: 200px;
-  }
-  .search-bar input::placeholder { color: rgba(255,255,255,0.45); }
-  .search-bar button {
-    background: var(--gold); border: none; padding: 8px 14px;
-    cursor: pointer; color: var(--navy); font-weight: 700;
-  }
+/* TOP STATUS BAR */
+.status-bar{position:relative;z-index:10;background:rgba(2,11,24,0.95);border-bottom:1px solid var(--border2);padding:6px 40px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;}
+.status-left{display:flex;gap:24px;align-items:center;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.status-right{display:flex;gap:20px;color:var(--muted);}
+.status-right span{color:var(--cyan);}
+.live-clock{color:var(--gold);font-weight:600;}
 
-  /* ── NAV ── */
-  nav {
-    background: rgba(10,22,40,0.95);
-    border-top: 1px solid rgba(200,168,75,0.25);
-    backdrop-filter: blur(4px);
-    position: sticky; top: 0; z-index: 100;
-  }
-  .nav-inner {
-    max-width: 1280px; margin: auto; padding: 0 32px;
-    display: flex; align-items: center;
-  }
-  .nav-inner a {
-    color: rgba(255,255,255,0.82);
-    text-decoration: none;
-    font-size: 13.5px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 16px 18px;
-    display: block;
-    transition: all 0.2s;
-    border-bottom: 3px solid transparent;
-    position: relative;
-  }
-  .nav-inner a:hover, .nav-inner a.active {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
-  }
-  .nav-dropdown { position: relative; }
-  .nav-dropdown .dropdown-menu {
-    display: none; position: absolute; top: 100%; left: 0;
-    background: var(--navy);
-    border: 1px solid rgba(200,168,75,0.2);
-    border-top: 2px solid var(--gold);
-    min-width: 220px; z-index: 200;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-  }
-  .nav-dropdown:hover .dropdown-menu { display: block; }
-  .dropdown-menu a {
-    padding: 10px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 13px; letter-spacing: 0;
-  }
-  .dropdown-menu a:last-child { border-bottom: none; }
+/* HEADER */
+header{position:relative;z-index:10;padding:28px 40px 0;background:linear-gradient(180deg,rgba(0,212,255,0.05) 0%,transparent 100%);}
+.header-inner{max-width:1400px;margin:auto;display:flex;align-items:center;gap:32px;}
 
-  /* ── HERO STRIP ── */
-  .hero-strip {
-    background: var(--gold);
-    padding: 10px 32px;
-    display: flex; align-items: center; gap: 12px;
-    max-width: 100%;
-  }
-  .hero-strip .label {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--navy); white-space: nowrap;
-    padding-right: 12px; border-right: 2px solid rgba(10,22,40,0.25);
-  }
-  .ticker { overflow: hidden; flex: 1; }
-  .ticker-track {
-    display: flex; gap: 0;
-    animation: ticker 28s linear infinite;
-  }
-  .ticker-track span {
-    white-space: nowrap; padding-right: 60px;
-    font-size: 13px; font-weight: 600; color: var(--navy);
-  }
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+/* LOGO */
+.logo-ring{position:relative;width:80px;height:80px;flex-shrink:0;}
+.logo-ring svg{width:80px;height:80px;}
+.logo-spin{animation:spin 12s linear infinite;transform-origin:40px 40px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.logo-inner{position:absolute;inset:12px;background:linear-gradient(135deg,#0a2040,#061428);border-radius:50%;border:1px solid var(--cyan2);display:flex;align-items:center;justify-content:center;font-size:26px;}
 
-  /* ── QUICK LINKS ── */
-  .quick-links {
-    max-width: 1280px; margin: 40px auto 0; padding: 0 32px;
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
-  }
-  .ql-card {
-    background: var(--white);
-    border-radius: 8px;
-    padding: 28px 20px;
-    text-align: center;
-    text-decoration: none;
-    color: var(--navy);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    border-top: 3px solid var(--gold);
-    transition: all 0.25s;
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-  }
-  .ql-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    border-top-color: var(--royal);
-  }
-  .ql-icon {
-    width: 52px; height: 52px;
-    background: var(--navy);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-  }
-  .ql-card h3 { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; }
-  .ql-card p { font-size: 12px; color: var(--gray); line-height: 1.4; }
+/* HEADER TEXT */
+.header-text{flex:1;}
+.header-text .tag{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--cyan);opacity:0.8;margin-bottom:4px;}
+.header-text h1{font-family:'Orbitron',monospace;font-size:32px;font-weight:900;color:var(--white);letter-spacing:0.04em;line-height:1;}
+.header-text h1 span{color:var(--cyan);}
+.header-text .sub{font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:0.08em;}
 
-  /* ── MAIN GRID ── */
-  .main-grid {
-    max-width: 1280px; margin: 40px auto; padding: 0 32px;
-    display: grid; grid-template-columns: 1fr 340px; gap: 32px;
-  }
+/* HEADER ACTIONS */
+.header-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.emg-btn{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#8b0000,#c0392b);border:1px solid rgba(255,59,59,0.5);color:white;padding:10px 22px;border-radius:3px;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all 0.2s;}
+.emg-btn:hover{background:linear-gradient(135deg,#c0392b,#e74c3c);box-shadow:0 0 16px rgba(255,59,59,0.4);}
+.emg-btn .dot{width:8px;height:8px;background:white;border-radius:50%;animation:pulse 1s infinite;}
+.search-hud{display:flex;border:1px solid var(--border2);background:rgba(0,212,255,0.04);border-radius:3px;overflow:hidden;}
+.search-hud input{background:transparent;border:none;outline:none;color:var(--white);padding:8px 16px;font-size:13px;width:220px;font-family:'Space Grotesk',sans-serif;}
+.search-hud input::placeholder{color:var(--muted);}
+.search-hud button{background:var(--cyan);border:none;padding:8px 14px;cursor:pointer;color:var(--bg);font-weight:700;font-size:13px;transition:all 0.2s;}
+.search-hud button:hover{background:var(--gold);}
 
-  /* ── SECTION HEADER ── */
-  .section-hd {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 20px;
-  }
-  .section-hd h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 700; color: var(--navy);
-    letter-spacing: 0.01em;
-  }
-  .section-hd::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, var(--gold), transparent);
-  }
-  .section-hd .badge {
-    background: var(--navy); color: var(--gold);
-    font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
-    text-transform: uppercase; padding: 3px 10px; border-radius: 2px;
-  }
+/* NAV */
+nav{position:relative;z-index:10;background:rgba(4,15,31,0.96);border-top:1px solid var(--border);border-bottom:1px solid var(--border2);backdrop-filter:blur(10px);position:sticky;top:0;}
+.nav-inner{max-width:1400px;margin:auto;padding:0 40px;display:flex;align-items:center;}
+.nav-item{position:relative;}
+.nav-item > a{color:rgba(200,230,255,0.7);text-decoration:none;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:14px 18px;display:block;transition:all 0.2s;border-bottom:2px solid transparent;}
+.nav-item > a:hover,.nav-item > a.active{color:var(--cyan);border-bottom-color:var(--cyan);}
+.nav-item:hover .sub-menu{display:block;}
+.sub-menu{display:none;position:absolute;top:100%;left:0;background:rgba(6,21,42,0.98);border:1px solid var(--border2);border-top:2px solid var(--cyan);min-width:220px;z-index:200;}
+.sub-menu a{display:block;padding:10px 20px;font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border);letter-spacing:0.06em;transition:all 0.15s;}
+.sub-menu a:hover{color:var(--cyan);background:rgba(0,212,255,0.05);padding-left:26px;}
 
-  /* ── NEWS CARDS ── */
-  .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; }
-  .news-card {
-    background: var(--white); border-radius: 6px; overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    transition: all 0.2s; text-decoration: none; color: var(--navy);
-    display: block;
-  }
-  .news-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-  .news-img {
-    height: 140px;
-    background: linear-gradient(135deg, var(--royal), var(--navy));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 48px;
-    position: relative; overflow: hidden;
-  }
-  .news-img::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,22,40,0.7), transparent);
-  }
-  .news-body { padding: 16px; }
-  .news-tag {
-    display: inline-block;
-    background: rgba(200,168,75,0.15);
-    color: #8a6f20; border-left: 3px solid var(--gold);
-    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; padding: 2px 8px; margin-bottom: 8px;
-  }
-  .news-card h4 { font-size: 14px; font-weight: 700; line-height: 1.4; color: var(--navy); }
+/* TICKER */
+.ticker-bar{position:relative;z-index:9;background:rgba(0,212,255,0.08);border-bottom:1px solid var(--border);padding:8px 40px;display:flex;align-items:center;gap:16px;overflow:hidden;}
+.ticker-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);white-space:nowrap;padding-right:16px;border-right:1px solid var(--border2);}
+.ticker-wrap{overflow:hidden;flex:1;}
+.ticker-inner{display:flex;animation:tick 30s linear infinite;white-space:nowrap;}
+.ticker-inner span{font-size:12px;color:var(--muted);padding-right:80px;letter-spacing:0.06em;}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-  /* ── NOTABLE SERVICES ── */
-  .service-list { display: flex; flex-direction: column; gap: 0; }
-  .service-item {
-    padding: 14px 0;
-    border-bottom: 1px solid #e5e7eb;
-    display: flex; gap: 14px; align-items: flex-start;
-    text-decoration: none; color: var(--navy); transition: all 0.15s;
-  }
-  .service-item:last-child { border-bottom: none; }
-  .service-item:hover { padding-left: 6px; color: var(--royal); }
-  .service-num {
-    width: 28px; height: 28px; flex-shrink: 0;
-    background: var(--navy); color: var(--gold);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700;
-  }
-  .service-item p { font-size: 13.5px; line-height: 1.5; font-weight: 600; }
+/* MAIN LAYOUT */
+.site-body{position:relative;z-index:5;max-width:1400px;margin:36px auto;padding:0 40px;display:grid;grid-template-columns:1fr 360px;gap:32px;}
 
-  /* ── SIDEBAR ── */
-  .sidebar { display: flex; flex-direction: column; gap: 24px; }
+/* SECTION HEADER */
+.sec-hd{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.sec-hd .line{flex:1;height:1px;background:linear-gradient(to right,var(--cyan2),transparent);}
+.sec-hd h2{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);}
+.sec-hd .badge{background:rgba(0,212,255,0.12);border:1px solid var(--border2);color:var(--cyan);font-size:10px;font-weight:700;letter-spacing:0.15em;padding:3px 10px;text-transform:uppercase;}
 
-  /* IGP Card */
-  .igp-card {
-    background: linear-gradient(160deg, var(--navy), var(--royal));
-    border-radius: 8px; overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    text-decoration: none;
-  }
-  .igp-header {
-    background: var(--gold);
-    padding: 10px 20px;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--navy);
-  }
-  .igp-body { padding: 24px 20px; text-align: center; }
-  .igp-avatar {
-    width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 14px;
-    background: radial-gradient(circle, rgba(200,168,75,0.3), rgba(10,22,40,0.8));
-    border: 3px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 40px;
-  }
-  .igp-body h3 {
-    font-family: 'Playfair Display', serif;
-    color: var(--white); font-size: 15px; font-weight: 700; line-height: 1.3;
-  }
-  .igp-body .title { color: var(--gold); font-size: 12px; margin-top: 4px; }
-  .igp-cta {
-    display: inline-block; margin-top: 14px;
-    border: 1px solid var(--gold); color: var(--gold);
-    padding: 6px 18px; border-radius: 3px; font-size: 12px;
-    text-decoration: none; transition: all 0.2s;
-  }
-  .igp-cta:hover { background: var(--gold); color: var(--navy); }
+/* QUICK ACCESS GRID */
+.qa-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:36px;}
+.qa-card{background:var(--panel);border:1px solid var(--border);padding:20px 14px;text-align:center;text-decoration:none;color:var(--white);cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.qa-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0);transition:transform 0.3s;}
+.qa-card:hover{background:var(--panel2);border-color:var(--cyan2);transform:translateY(-3px);}
+.qa-card:hover::before{transform:scaleX(1);}
+.qa-icon{width:44px;height:44px;background:rgba(0,212,255,0.08);border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all 0.25s;}
+.qa-card:hover .qa-icon{background:rgba(0,212,255,0.15);box-shadow:0 0 12px rgba(0,212,255,0.2);}
+.qa-card h3{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);}
+.qa-card p{font-size:10px;color:var(--muted);line-height:1.4;}
 
-  /* Related Links */
-  .sidebar-card {
-    background: var(--white); border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    overflow: hidden;
-  }
-  .sidebar-card-hd {
-    background: var(--navy); color: var(--gold);
-    padding: 12px 20px;
-    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .related-list { padding: 8px 0; }
-  .related-list a {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 20px;
-    font-size: 13px; color: var(--navy);
-    text-decoration: none; border-bottom: 1px solid #f0f0f0;
-    transition: all 0.15s;
-  }
-  .related-list a:last-child { border-bottom: none; }
-  .related-list a:hover { background: #f8f6f0; color: var(--royal); padding-left: 26px; }
-  .related-list a::before {
-    content: '›'; color: var(--gold); font-size: 18px; font-weight: 700;
-  }
+/* NEWS GRID */
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px;}
+.news-card{background:var(--panel);border:1px solid var(--border);text-decoration:none;color:var(--white);display:block;transition:all 0.2s;position:relative;overflow:hidden;}
+.news-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(0,212,255,0.04));pointer-events:none;}
+.news-card:hover{border-color:var(--cyan2);transform:translateY(-2px);}
+.news-img{height:120px;background:linear-gradient(135deg,#061428,#0a2040);display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;}
+.news-img .hud-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:8px;}
+.news-date{font-size:10px;letter-spacing:0.12em;color:var(--cyan);font-weight:600;border:1px solid var(--border2);padding:2px 8px;background:rgba(0,212,255,0.08);}
+.news-body{padding:14px;}
+.news-tag{display:inline-block;background:rgba(240,180,41,0.1);border-left:2px solid var(--gold);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:2px 8px;margin-bottom:8px;}
+.news-card h4{font-size:13px;font-weight:600;line-height:1.4;color:var(--white);}
 
-  /* Contact sidebar */
-  .contact-card {
-    background: var(--navy); border-radius: 8px;
-    padding: 20px;
-    color: white;
-  }
-  .contact-card h3 {
-    color: var(--gold);
-    font-family: 'Playfair Display', serif;
-    font-size: 16px; margin-bottom: 14px;
-    border-bottom: 1px solid rgba(200,168,75,0.3); padding-bottom: 10px;
-  }
-  .contact-item { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; }
-  .contact-item .ico { font-size: 16px; flex-shrink: 0; }
-  .contact-item span { color: rgba(255,255,255,0.8); line-height: 1.4; }
-  .social-row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-  .social-btn {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(200,168,75,0.3);
-    color: rgba(255,255,255,0.8);
-    padding: 6px 10px; border-radius: 3px;
-    font-size: 11px; font-weight: 600; text-decoration: none;
-    transition: all 0.2s; letter-spacing: 0.05em;
-  }
-  .social-btn:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+/* SERVICES LIST */
+.svc-list{display:flex;flex-direction:column;gap:0;}
+.svc-item{padding:14px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:14px;text-decoration:none;color:var(--white);transition:all 0.15s;}
+.svc-item:last-child{border-bottom:none;}
+.svc-item:hover{padding-left:8px;color:var(--cyan);}
+.svc-num{width:26px;height:26px;flex-shrink:0;background:rgba(0,212,255,0.08);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--cyan);}
+.svc-item p{font-size:13px;line-height:1.5;color:var(--muted);}
+.svc-item:hover p{color:var(--white);}
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy);
-    border-top: 3px solid var(--gold);
-    color: rgba(255,255,255,0.65);
-    padding: 40px 0 20px;
-    margin-top: 60px;
-  }
-  .footer-inner {
-    max-width: 1280px; margin: auto; padding: 0 32px;
-    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
-  }
-  footer h4 { color: var(--gold); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
-  footer p { font-size: 13px; line-height: 1.7; }
-  footer a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13px; display: block; margin-bottom: 8px; }
-  footer a:hover { color: var(--gold); }
-  .footer-bottom {
-    max-width: 1280px; margin: 30px auto 0; padding: 20px 32px 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 12px;
-  }
-  .scroll-top {
-    position: fixed; bottom: 28px; right: 28px;
-    background: var(--gold); color: var(--navy);
-    width: 44px; height: 44px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; cursor: pointer; text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: all 0.2s; border: none;
-  }
-  .scroll-top:hover { background: var(--gold-light); transform: translateY(-3px); }
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:20px;}
 
-  @media (max-width: 900px) {
-    .quick-links { grid-template-columns: repeat(3, 1fr); }
-    .main-grid { grid-template-columns: 1fr; }
-    .news-grid { grid-template-columns: 1fr; }
-    .footer-inner { grid-template-columns: 1fr; }
-    .header-inner { flex-wrap: wrap; }
-    .header-right { width: 100%; flex-direction: row; flex-wrap: wrap; }
-  }
+/* IGP CARD */
+.igp-card{background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;}
+.igp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.igp-top{background:linear-gradient(135deg,#061428,#0a2040);padding:28px 20px;text-align:center;position:relative;}
+.igp-avatar{width:84px;height:84px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,#061428,#082040);border:2px solid var(--cyan2);display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;}
+.igp-avatar::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(0,212,255,0.2);}
+.igp-rank{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;}
+.igp-name{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--white);line-height:1.4;}
+.igp-title{font-size:11px;color:var(--gold);margin-top:4px;letter-spacing:0.06em;}
+.igp-bottom{padding:14px 20px;}
+.igp-profile-btn{display:block;text-align:center;border:1px solid var(--cyan2);color:var(--cyan);padding:8px;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;}
+.igp-profile-btn:hover{background:rgba(0,212,255,0.08);}
+
+/* RELATED LINKS CARD */
+.panel-card{background:var(--panel);border:1px solid var(--border);overflow:hidden;}
+.panel-hd{background:linear-gradient(90deg,rgba(0,212,255,0.1),transparent);border-bottom:1px solid var(--border);padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:8px;}
+.panel-hd::before{content:'';width:6px;height:6px;background:var(--cyan);border-radius:50%;}
+.rel-links a{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border);transition:all 0.15s;}
+.rel-links a:last-child{border-bottom:none;}
+.rel-links a:hover{color:var(--cyan);background:rgba(0,212,255,0.04);padding-left:22px;}
+.rel-links a::before{content:'›';color:var(--cyan);font-size:16px;}
+
+/* CONTACT CARD */
+.contact-card{background:var(--panel);border:1px solid var(--border);padding:20px;}
+.contact-card h3{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.cinfo{display:flex;gap:10px;margin-bottom:10px;font-size:12px;align-items:flex-start;}
+.cinfo .ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.cinfo span{color:var(--muted);line-height:1.5;}
+.cinfo strong{color:var(--white);}
+.socials{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.soc-btn{background:rgba(0,212,255,0.06);border:1px solid var(--border);color:var(--muted);padding:5px 10px;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:0.06em;transition:all 0.2s;}
+.soc-btn:hover{background:rgba(0,212,255,0.12);border-color:var(--cyan2);color:var(--cyan);}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;}
+.stat-box{background:var(--panel);border:1px solid var(--border);padding:16px;position:relative;overflow:hidden;}
+.stat-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent,var(--cyan));opacity:0.4;}
+.stat-num{font-family:'Orbitron',monospace;font-size:24px;font-weight:700;color:var(--accent,var(--cyan));line-height:1;}
+.stat-label{font-size:10px;color:var(--muted);margin-top:6px;letter-spacing:0.08em;text-transform:uppercase;}
+
+/* FOOTER */
+footer{position:relative;z-index:5;background:var(--panel);border-top:1px solid var(--border2);padding:40px 0 20px;margin-top:60px;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),var(--gold),var(--cyan),transparent);}
+.footer-inner{max-width:1400px;margin:auto;padding:0 40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;}
+footer h4{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;}
+footer p{font-size:12px;color:var(--muted);line-height:1.8;}
+footer a{display:block;font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:8px;transition:color 0.15s;}
+footer a:hover{color:var(--cyan);}
+.footer-bottom{max-width:1400px;margin:30px auto 0;padding:20px 40px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--muted);letter-spacing:0.06em;}
+
+/* SCROLL TOP */
+#scroll-top{position:fixed;bottom:28px;right:28px;width:42px;height:42px;background:var(--panel);border:1px solid var(--cyan2);color:var(--cyan);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;z-index:9999;transition:all 0.2s;}
+#scroll-top:hover{background:rgba(0,212,255,0.1);box-shadow:0 0 16px rgba(0,212,255,0.2);}
+
+/* ANIMATED CORNER DECORATION */
+.hud-corner{position:absolute;width:20px;height:20px;}
+.hud-corner.tl{top:6px;left:6px;border-top:1px solid var(--cyan);border-left:1px solid var(--cyan);}
+.hud-corner.tr{top:6px;right:6px;border-top:1px solid var(--cyan);border-right:1px solid var(--cyan);}
+.hud-corner.bl{bottom:6px;left:6px;border-bottom:1px solid var(--cyan);border-left:1px solid var(--cyan);}
+.hud-corner.br{bottom:6px;right:6px;border-bottom:1px solid var(--cyan);border-right:1px solid var(--cyan);}
+
+@media(max-width:900px){
+  .site-body{grid-template-columns:1fr;}
+  .qa-grid{grid-template-columns:repeat(3,1fr);}
+  .news-grid{grid-template-columns:1fr;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .footer-inner{grid-template-columns:1fr;}
+  header{padding:20px 20px 0;}
+  .header-inner{flex-wrap:wrap;}
+  .nav-inner{padding:0 20px;}
+  .site-body{padding:0 20px;}
+}
 </style>
 </head>
 <body>
+<div class="grid-bg"></div>
 
-<!-- TOP BAR -->
-<div class="top-bar">
-  <div class="inner">
-    <span>🇱🇰 Official Website of Sri Lanka Police | <a href="#">Sinhala</a> | <a href="#">Tamil</a></span>
-    <span>Emergency: <a href="tel:119"><strong>119</strong></a> &nbsp;|&nbsp; Headquarters: <a href="tel:+94112421111">+94 11 242 1111</a></span>
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="status-left">
+    <span class="status-dot"></span>
+    <span style="color:var(--muted)">System Status: <span style="color:var(--green)">Operational</span></span>
+    <span style="color:var(--muted)">|</span>
+    <span style="color:var(--muted)">Emergency: <a href="tel:119" style="color:var(--red);text-decoration:none;font-weight:700;">119</a></span>
+    <span style="color:var(--muted)">|</span>
+    <a href="#" style="color:var(--cyan);text-decoration:none;">සිංහල</a>
+    <a href="#" style="color:var(--cyan);text-decoration:none;">தமிழ்</a>
+  </div>
+  <div class="status-right">
+    <span>HQ: Colombo 02</span>
+    <span>|</span>
+    <span id="lc" class="live-clock">--:--:--</span>
   </div>
 </div>
 
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="logo-emblem">🛡️</div>
-    <div class="header-text">
-      <h1>Sri Lanka Police</h1>
-      <div class="sub">Serving with Honour · Protecting with Pride</div>
-      <div class="sinhala">ශ්‍රී ලංකා පොලිස් | இலங்கை பொலிஸ்</div>
+    <!-- Logo -->
+    <div class="logo-ring">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(0,212,255,0.15)" stroke-width="1"/>
+        <g class="logo-spin">
+          <circle cx="40" cy="4" r="3" fill="#00d4ff" opacity="0.8"/>
+          <circle cx="76" cy="40" r="2" fill="#00d4ff" opacity="0.5"/>
+          <circle cx="40" cy="76" r="3" fill="#f0b429" opacity="0.8"/>
+          <circle cx="4" cy="40" r="2" fill="#00d4ff" opacity="0.5"/>
+        </g>
+        <circle cx="40" cy="40" r="28" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="0.5" stroke-dasharray="4 4"/>
+      </svg>
+      <div class="logo-inner">🛡️</div>
     </div>
-    <div class="header-right">
-      <a href="tel:119" class="emergency-btn">🚨 Emergency: 119</a>
-      <div class="search-bar">
-        <input type="text" placeholder="Search...">
-        <button>🔍</button>
+
+    <div class="header-text">
+      <div class="tag">// Official Digital Command Center</div>
+      <h1>SRI LANKA <span>POLICE</span></h1>
+      <div class="sub">ශ්‍රී ලංකා පොලිස් &nbsp;|&nbsp; இலங்கை பொலிஸ் &nbsp;|&nbsp; Serving with Honour · Protecting with Pride</div>
+    </div>
+
+    <div class="header-actions">
+      <a href="tel:119" class="emg-btn"><span class="dot"></span> Emergency: 119</a>
+      <div class="search-hud">
+        <input type="text" placeholder="Search command center...">
+        <button>⌕</button>
       </div>
     </div>
   </div>
 
   <!-- NAV -->
-  <nav>
+  <nav style="margin-top:20px;">
     <div class="nav-inner">
-      <a href="#" class="active">Home</a>
-      <div class="nav-dropdown">
-        <a href="#">About Us ▾</a>
-        <div class="dropdown-menu">
+      <div class="nav-item"><a href="#" class="active">[ Home ]</a></div>
+      <div class="nav-item">
+        <a href="#">About ▾</a>
+        <div class="sub-menu">
           <a href="#">History & Mission</a>
           <a href="#">Inspector General</a>
         </div>
       </div>
-      <div class="nav-dropdown">
+      <div class="nav-item">
         <a href="#">Divisions ▾</a>
-        <div class="dropdown-menu">
+        <div class="sub-menu">
           <a href="#">Criminal Investigation</a>
           <a href="#">Traffic Police</a>
           <a href="#">Special Task Force</a>
@@ -479,9 +289,9 @@
           <a href="#">Women & Children</a>
         </div>
       </div>
-      <div class="nav-dropdown">
+      <div class="nav-item">
         <a href="#">Downloads ▾</a>
-        <div class="dropdown-menu">
+        <div class="sub-menu">
           <a href="#">Annual Reports</a>
           <a href="#">Forms & Applications</a>
           <a href="#">Circulars</a>
@@ -489,108 +299,141 @@
           <a href="#">Gazettes</a>
         </div>
       </div>
-      <div class="nav-dropdown">
+      <div class="nav-item">
         <a href="#">Library ▾</a>
-        <div class="dropdown-menu">
+        <div class="sub-menu">
           <a href="#">Publications</a>
           <a href="#">Research</a>
           <a href="#">Law References</a>
         </div>
       </div>
-      <div class="nav-dropdown">
+      <div class="nav-item">
         <a href="#">Survey ▾</a>
-        <div class="dropdown-menu">
+        <div class="sub-menu">
           <a href="#">Public Satisfaction</a>
           <a href="#">Crime Statistics</a>
-          <a href="#">Service Feedback</a>
+          <a href="#">Feedback</a>
         </div>
       </div>
     </div>
   </nav>
 </header>
 
-<!-- NEWS TICKER -->
-<div class="hero-strip">
-  <span class="label">📢 News</span>
-  <div class="ticker">
-    <div class="ticker-track">
+<!-- TICKER -->
+<div class="ticker-bar">
+  <span class="ticker-label">// Live Feed</span>
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
       <span>17th Anniversary of Victory Day Commemoration — We Salute Our Heroes</span>
-      <span>Vietnam People's Police Academy & National Police Training Institute Sign MOU</span>
+      <span>Vietnam People's Police Academy &amp; National Police Training Institute Sign MOU</span>
       <span>Minister and IGP Meet Police Officers in the Puttalam District</span>
-      <span>Traffic arrangements for the 17th National War Heroes' Commemoration Ceremony</span>
-      <span>Sri Lanka Police's First International Research Conference to Receive Extensive Media Coverage</span>
+      <span>Traffic arrangements for 17th National War Heroes' Commemoration Ceremony</span>
+      <span>Sri Lanka Police's First International Research Conference Announced</span>
+      <span>Crow Island Beach Cleaned — Environmental Protection Division</span>
       <span>17th Anniversary of Victory Day Commemoration — We Salute Our Heroes</span>
-      <span>Vietnam People's Police Academy & National Police Training Institute Sign MOU</span>
+      <span>Vietnam People's Police Academy &amp; National Police Training Institute Sign MOU</span>
       <span>Minister and IGP Meet Police Officers in the Puttalam District</span>
-      <span>Traffic arrangements for the 17th National War Heroes' Commemoration Ceremony</span>
-      <span>Sri Lanka Police's First International Research Conference to Receive Extensive Media Coverage</span>
+      <span>Traffic arrangements for 17th National War Heroes' Commemoration Ceremony</span>
+      <span>Sri Lanka Police's First International Research Conference Announced</span>
+      <span>Crow Island Beach Cleaned — Environmental Protection Division</span>
     </div>
   </div>
 </div>
 
-<!-- QUICK LINKS -->
-<div class="quick-links">
-  <a href="https://www.police.lk/?page_id=647" class="ql-card">
-    <div class="ql-icon">🖥️</div>
-    <h3>E-Services</h3>
-    <p>Clearance Reports & Complaints</p>
-  </a>
-  <a href="https://www.police.lk/?page_id=657" class="ql-card">
-    <div class="ql-icon">📰</div>
-    <h3>Media</h3>
-    <p>Press Releases & News Updates</p>
-  </a>
-  <a href="https://www.police.lk/?page_id=655" class="ql-card">
-    <div class="ql-icon">🖼️</div>
-    <h3>Gallery</h3>
-    <p>Image & Video Collection</p>
-  </a>
-  <a href="https://www.police.lk/?page_id=495" class="ql-card">
-    <div class="ql-icon">📞</div>
-    <h3>Contact Us</h3>
-    <p>Telephone, Police Stations & More</p>
-  </a>
-  <a href="https://www.police.lk/?page_id=2170" class="ql-card">
-    <div class="ql-icon">🎖️</div>
-    <h3>Join Us</h3>
-    <p>Become a Guardian of Peace</p>
-  </a>
+<!-- QUICK ACCESS -->
+<div style="position:relative;z-index:5;max-width:1400px;margin:32px auto 0;padding:0 40px;">
+  <div class="qa-grid">
+    <a href="https://www.police.lk/?page_id=647" class="qa-card">
+      <div class="qa-icon">🖥️</div>
+      <h3>E-Services</h3>
+      <p>Clearance Reports &amp; Complaints</p>
+    </a>
+    <a href="https://www.police.lk/?page_id=657" class="qa-card">
+      <div class="qa-icon">📡</div>
+      <h3>Media</h3>
+      <p>Press Releases &amp; Updates</p>
+    </a>
+    <a href="https://www.police.lk/?page_id=655" class="qa-card">
+      <div class="qa-icon">🎞️</div>
+      <h3>Gallery</h3>
+      <p>Images &amp; Video Archive</p>
+    </a>
+    <a href="https://www.police.lk/?page_id=495" class="qa-card">
+      <div class="qa-icon">📞</div>
+      <h3>Contact</h3>
+      <p>Stations &amp; Directories</p>
+    </a>
+    <a href="https://www.police.lk/?page_id=2170" class="qa-card">
+      <div class="qa-icon">🎖️</div>
+      <h3>Join Us</h3>
+      <p>Become a Guardian of Peace</p>
+    </a>
+  </div>
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="main-grid">
-
-  <!-- LEFT COLUMN -->
+<!-- MAIN BODY -->
+<div class="site-body">
   <div>
-    <!-- Special Events -->
-    <div class="section-hd">
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-box" style="--accent:var(--cyan)">
+        <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
+        <div class="hud-corner bl"></div><div class="hud-corner br"></div>
+        <div class="stat-num" id="s1">0</div>
+        <div class="stat-label">Police Stations</div>
+      </div>
+      <div class="stat-box" style="--accent:var(--gold)">
+        <div class="stat-num" id="s2">0</div>
+        <div class="stat-label">Officers Nationwide</div>
+      </div>
+      <div class="stat-box" style="--accent:var(--green)">
+        <div class="stat-num" id="s3">0</div>
+        <div class="stat-label">Cases Resolved (2027)</div>
+      </div>
+      <div class="stat-box" style="--accent:var(--red)">
+        <div class="stat-num" id="s4">24/7</div>
+        <div class="stat-label">Emergency Response</div>
+      </div>
+    </div>
+
+    <!-- SPECIAL EVENTS -->
+    <div class="sec-hd">
       <span class="badge">Latest</span>
       <h2>Special Events</h2>
+      <div class="line"></div>
     </div>
     <div class="news-grid">
       <a href="https://www.police.lk/?p=23642" class="news-card">
-        <div class="news-img">🏅</div>
+        <div class="news-img">🏅
+          <div class="hud-overlay"><span class="news-date">MAY 2027</span></div>
+        </div>
         <div class="news-body">
           <span class="news-tag">Victory Day</span>
           <h4>17th Anniversary of the Victory Day Commemoration</h4>
         </div>
       </a>
       <a href="https://www.police.lk/?p=23495" class="news-card">
-        <div class="news-img">🎖️</div>
+        <div class="news-img">🎖️
+          <div class="hud-overlay"><span class="news-date">MAY 2027</span></div>
+        </div>
         <div class="news-body">
           <span class="news-tag">Tribute</span>
-          <h4>We Salute Our Heroes</h4>
+          <h4>We Salute Our Heroes — National Recognition Ceremony</h4>
         </div>
       </a>
       <a href="https://www.police.lk/?p=23488" class="news-card">
-        <div class="news-img">🤝</div>
+        <div class="news-img">🤝
+          <div class="hud-overlay"><span class="news-date">APR 2027</span></div>
+        </div>
         <div class="news-body">
           <span class="news-tag">Community</span>
           <h4>Minister and IGP Meet Police Officers in Puttalam District</h4>
         </div>
       </a>
       <a href="https://www.police.lk/?p=23427" class="news-card">
-        <div class="news-img">✍️</div>
+        <div class="news-img">✍️
+          <div class="hud-overlay"><span class="news-date">APR 2027</span></div>
+        </div>
         <div class="news-body">
           <span class="news-tag">International</span>
           <h4>Vietnam People's Police Academy and NPTI Sign MOU</h4>
@@ -598,26 +441,27 @@
       </a>
     </div>
 
-    <!-- Notable Services -->
-    <div class="section-hd">
+    <!-- NOTABLE SERVICES -->
+    <div class="sec-hd">
       <span class="badge">Services</span>
       <h2>Notable Services</h2>
+      <div class="line"></div>
     </div>
-    <div class="service-list">
-      <a href="https://www.police.lk/?p=23503" class="service-item">
-        <div class="service-num">1</div>
+    <div class="svc-list">
+      <a href="https://www.police.lk/?p=23503" class="svc-item">
+        <div class="svc-num">01</div>
         <p>Traffic Arrangements for the 17th National War Heroes' Commemoration Ceremony</p>
       </a>
-      <a href="https://www.police.lk/?p=23392" class="service-item">
-        <div class="service-num">2</div>
+      <a href="https://www.police.lk/?p=23392" class="svc-item">
+        <div class="svc-num">02</div>
         <p>Sri Lanka Police's First International Research Conference to Receive Extensive Media Coverage</p>
       </a>
-      <a href="https://www.police.lk/?p=23370" class="service-item">
-        <div class="service-num">3</div>
+      <a href="https://www.police.lk/?p=23370" class="svc-item">
+        <div class="svc-num">03</div>
         <p>Polluted Crow Island Beach Cleaned Through Intervention of the Environmental Protection Division</p>
       </a>
-      <a href="https://www.police.lk/?p=23348" class="service-item">
-        <div class="service-num">4</div>
+      <a href="https://www.police.lk/?p=23348" class="svc-item">
+        <div class="svc-num">04</div>
         <p>Police Health and Welfare Scheme Expanded to Enhance Benefits for Police Officers</p>
       </a>
     </div>
@@ -625,26 +469,28 @@
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-
     <!-- IGP -->
-    <div class="igp-card">
-      <div class="igp-header">Inspector General of Police</div>
-      <div class="igp-body">
+    <div class="igp-card" style="position:relative;">
+      <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
+      <div class="igp-top">
+        <div class="igp-rank">// Inspector General of Police</div>
         <div class="igp-avatar">👮</div>
-        <h3>Attorney-at-Law<br>Mr. Priyantha Weerasooriya</h3>
-        <div class="title">Inspector General of Police</div>
-        <a href="https://www.police.lk/?page_id=12731" class="igp-cta">View Profile →</a>
+        <div class="igp-name">Atty. Priyantha Weerasooriya</div>
+        <div class="igp-title">Inspector General of Police</div>
+      </div>
+      <div class="igp-bottom">
+        <a href="https://www.police.lk/?page_id=12731" class="igp-profile-btn">[ View Profile ] →</a>
       </div>
     </div>
 
     <!-- Related Links -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-hd">Related Links</div>
-      <div class="related-list">
+    <div class="panel-card">
+      <div class="panel-hd">Related Links</div>
+      <div class="rel-links">
         <a href="https://www.presidentsoffice.gov.lk/" target="_blank">Presidential Secretariat</a>
-        <a href="https://www.pubsec.gov.lk/" target="_blank">Ministry of Public Security & Parliamentary Affairs</a>
-        <a href="https://www.immigration.gov.lk/" target="_blank">Department of Immigration & Emigration</a>
-        <a href="https://drp.gov.lk/" target="_blank">Department of Registration of Persons</a>
+        <a href="https://www.pubsec.gov.lk/" target="_blank">Ministry of Public Security</a>
+        <a href="https://www.immigration.gov.lk/" target="_blank">Dept. of Immigration &amp; Emigration</a>
+        <a href="https://drp.gov.lk/" target="_blank">Dept. of Registration of Persons</a>
         <a href="https://www.nddcb.gov.lk/" target="_blank">National Dangerous Drugs Control Board</a>
         <a href="https://npa.gov.lk/" target="_blank">National Police Academy</a>
       </div>
@@ -652,21 +498,20 @@
 
     <!-- Contact -->
     <div class="contact-card">
-      <h3>📍 Contact Us</h3>
-      <div class="contact-item"><span class="ico">🏛️</span><span>Police Headquarters, Colombo 02, Sri Lanka.</span></div>
-      <div class="contact-item"><span class="ico">📞</span><span>(+94) 11 2421111</span></div>
-      <div class="contact-item"><span class="ico">📠</span><span>(+94) 11-2440584</span></div>
-      <div class="contact-item"><span class="ico">🚨</span><span><strong style="color:var(--gold)">Emergency: 119</strong></span></div>
-      <div class="social-row">
-        <a href="https://www.facebook.com/people/Sri-Lanka-Police/100064256130301/" target="_blank" class="social-btn">Facebook</a>
-        <a href="https://www.tiktok.com/@sri_lanka_police" target="_blank" class="social-btn">TikTok</a>
-        <a href="https://www.youtube.com/@Sri_Lanka_police" target="_blank" class="social-btn">YouTube</a>
-        <a href="https://www.instagram.com/sri_lanka_police/" target="_blank" class="social-btn">Instagram</a>
-        <a href="https://www.linkedin.com/in/sri-lanka-police-90a31727b" target="_blank" class="social-btn">LinkedIn</a>
-        <a href="https://x.com/SL_PoliceMedia" target="_blank" class="social-btn">𝕏 Twitter</a>
+      <h3>// Contact Command</h3>
+      <div class="cinfo"><span class="ico">📍</span><span>Police Headquarters, Colombo 02, Sri Lanka.</span></div>
+      <div class="cinfo"><span class="ico">📞</span><span><strong>(+94) 11 2421111</strong></span></div>
+      <div class="cinfo"><span class="ico">📠</span><span>(+94) 11-2440584</span></div>
+      <div class="cinfo"><span class="ico">🚨</span><span><strong style="color:var(--red);">Emergency Line: 119</strong></span></div>
+      <div class="socials">
+        <a href="https://www.facebook.com/people/Sri-Lanka-Police/100064256130301/" class="soc-btn" target="_blank">Facebook</a>
+        <a href="https://www.tiktok.com/@sri_lanka_police" class="soc-btn" target="_blank">TikTok</a>
+        <a href="https://www.youtube.com/@Sri_Lanka_police" class="soc-btn" target="_blank">YouTube</a>
+        <a href="https://www.instagram.com/sri_lanka_police/" class="soc-btn" target="_blank">Instagram</a>
+        <a href="https://www.linkedin.com/in/sri-lanka-police-90a31727b" class="soc-btn" target="_blank">LinkedIn</a>
+        <a href="https://x.com/SL_PoliceMedia" class="soc-btn" target="_blank">𝕏 Twitter</a>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -675,10 +520,10 @@
   <div class="footer-inner">
     <div>
       <h4>Sri Lanka Police</h4>
-      <p>Sri Lanka Police is dedicated to maintaining law and order, preventing and detecting crime, and serving the people of Sri Lanka with honour and integrity. We are committed to building a safer nation through professionalism, accountability, and community partnership.</p>
+      <p>Sri Lanka Police is dedicated to maintaining law and order, preventing and detecting crime, and serving the people of Sri Lanka with honour and integrity. Committed to a safer nation through professionalism, accountability, and community partnership.</p>
     </div>
     <div>
-      <h4>Quick Links</h4>
+      <h4>Navigation</h4>
       <a href="#">Home</a>
       <a href="#">About Us</a>
       <a href="#">Divisions</a>
@@ -687,7 +532,7 @@
       <a href="#">Join Us</a>
     </div>
     <div>
-      <h4>Downloads</h4>
+      <h4>Resources</h4>
       <a href="#">Annual Reports</a>
       <a href="#">Forms</a>
       <a href="#">Circulars</a>
@@ -696,13 +541,41 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2024 Sri Lanka Police. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Disclaimer</a></span>
-    <span>Designed & Maintained by Sri Lanka Police IT Division</span>
+    <span>© 2027 Sri Lanka Police. All rights reserved. | <a href="#" style="color:var(--cyan);">Privacy Policy</a> | <a href="#" style="color:var(--cyan);">Disclaimer</a></span>
+    <span>Designed by Sri Lanka Police Digital Command</span>
   </div>
 </footer>
 
 <!-- SCROLL TO TOP -->
-<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<script>
+// Live clock
+function tick(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('lc').textContent=h+':'+m+':'+s;
+}
+tick();setInterval(tick,1000);
+
+// Counter animation
+function animCount(id,target,suffix){
+  const el=document.getElementById(id);
+  if(!el)return;
+  let start=0;const dur=1800;const step=target/dur*16;
+  const t=setInterval(()=>{
+    start=Math.min(start+step,target);
+    el.textContent=Math.round(start).toLocaleString()+(suffix||'');
+    if(start>=target)clearInterval(t);
+  },16);
+}
+window.addEventListener('load',()=>{
+  animCount('s1',705,'+');
+  animCount('s2',84000,'+');
+  animCount('s3',12847,'');
+});
+</script>
 </body>
 </html>
