@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Lanka Police</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --royal: #1a3a6b;
+    --gold: #c8a84b;
+    --gold-light: #e8c96e;
+    --cream: #f5f0e8;
+    --white: #ffffff;
+    --gray: #6b7280;
+    --light-gray: #f3f4f6;
+    --red: #c0392b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── TOP BAR ── */
+  .top-bar {
+    background: var(--navy);
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    padding: 6px 0;
+    letter-spacing: 0.05em;
+  }
+  .top-bar .inner {
+    max-width: 1280px; margin: auto; padding: 0 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .top-bar a { color: var(--gold); text-decoration: none; }
+  .top-bar a:hover { color: var(--gold-light); }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 60%, #0d2952 100%);
+    padding: 24px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a84b' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 1280px; margin: auto; padding: 0 32px;
+    display: flex; align-items: center; gap: 28px;
+  }
+  .logo-emblem {
+    width: 88px; height: 88px;
+    background: radial-gradient(circle, var(--gold) 0%, #a07830 100%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px rgba(200,168,75,0.3), 0 8px 24px rgba(0,0,0,0.4);
+    font-size: 42px;
+  }
+  .header-text { flex: 1; }
+  .header-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  .header-text .sub {
+    color: var(--gold);
+    font-size: 13px; letter-spacing: 0.2em;
+    text-transform: uppercase; margin-top: 4px;
+    font-weight: 600;
+  }
+  .header-text .sinhala {
+    color: rgba(255,255,255,0.55);
+    font-size: 14px; margin-top: 2px;
+  }
+  .header-right {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  }
+  .emergency-btn {
+    background: var(--red);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap-x: 8px;
+    box-shadow: 0 4px 12px rgba(192,57,43,0.4);
+    transition: all 0.2s;
+  }
+  .emergency-btn:hover { background: #a93226; transform: translateY(-1px); }
+  .search-bar {
+    display: flex; gap: 0;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 4px; overflow: hidden;
+  }
+  .search-bar input {
+    background: transparent; border: none; outline: none;
+    color: white; padding: 8px 16px; font-size: 13px; width: 200px;
+  }
+  .search-bar input::placeholder { color: rgba(255,255,255,0.45); }
+  .search-bar button {
+    background: var(--gold); border: none; padding: 8px 14px;
+    cursor: pointer; color: var(--navy); font-weight: 700;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: rgba(10,22,40,0.95);
+    border-top: 1px solid rgba(200,168,75,0.25);
+    backdrop-filter: blur(4px);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-inner {
+    max-width: 1280px; margin: auto; padding: 0 32px;
+    display: flex; align-items: center;
+  }
+  .nav-inner a {
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 16px 18px;
+    display: block;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    position: relative;
+  }
+  .nav-inner a:hover, .nav-inner a.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--navy);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-top: 2px solid var(--gold);
+    min-width: 220px; z-index: 200;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+  }
+  .nav-dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px; letter-spacing: 0;
+  }
+  .dropdown-menu a:last-child { border-bottom: none; }
+
+  /* ── HERO STRIP ── */
+  .hero-strip {
+    background: var(--gold);
+    padding: 10px 32px;
+    display: flex; align-items: center; gap: 12px;
+    max-width: 100%;
+  }
+  .hero-strip .label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--navy); white-space: nowrap;
+    padding-right: 12px; border-right: 2px solid rgba(10,22,40,0.25);
+  }
+  .ticker { overflow: hidden; flex: 1; }
+  .ticker-track {
+    display: flex; gap: 0;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker-track span {
+    white-space: nowrap; padding-right: 60px;
+    font-size: 13px; font-weight: 600; color: var(--navy);
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── QUICK LINKS ── */
+  .quick-links {
+    max-width: 1280px; margin: 40px auto 0; padding: 0 32px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+  .ql-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 28px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--navy);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 3px solid var(--gold);
+    transition: all 0.25s;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .ql-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-top-color: var(--royal);
+  }
+  .ql-icon {
+    width: 52px; height: 52px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .ql-card h3 { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; }
+  .ql-card p { font-size: 12px; color: var(--gray); line-height: 1.4; }
+
+  /* ── MAIN GRID ── */
+  .main-grid {
+    max-width: 1280px; margin: 40px auto; padding: 0 32px;
+    display: grid; grid-template-columns: 1fr 340px; gap: 32px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-hd {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-hd h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--navy);
+    letter-spacing: 0.01em;
+  }
+  .section-hd::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+  }
+  .section-hd .badge {
+    background: var(--navy); color: var(--gold);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 2px;
+  }
+
+  /* ── NEWS CARDS ── */
+  .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; }
+  .news-card {
+    background: var(--white); border-radius: 6px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.2s; text-decoration: none; color: var(--navy);
+    display: block;
+  }
+  .news-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+  .news-img {
+    height: 140px;
+    background: linear-gradient(135deg, var(--royal), var(--navy));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+    position: relative; overflow: hidden;
+  }
+  .news-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,22,40,0.7), transparent);
+  }
+  .news-body { padding: 16px; }
+  .news-tag {
+    display: inline-block;
+    background: rgba(200,168,75,0.15);
+    color: #8a6f20; border-left: 3px solid var(--gold);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 2px 8px; margin-bottom: 8px;
+  }
+  .news-card h4 { font-size: 14px; font-weight: 700; line-height: 1.4; color: var(--navy); }
+
+  /* ── NOTABLE SERVICES ── */
+  .service-list { display: flex; flex-direction: column; gap: 0; }
+  .service-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex; gap: 14px; align-items: flex-start;
+    text-decoration: none; color: var(--navy); transition: all 0.15s;
+  }
+  .service-item:last-child { border-bottom: none; }
+  .service-item:hover { padding-left: 6px; color: var(--royal); }
+  .service-num {
+    width: 28px; height: 28px; flex-shrink: 0;
+    background: var(--navy); color: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+  .service-item p { font-size: 13.5px; line-height: 1.5; font-weight: 600; }
+
+  /* ── SIDEBAR ── */
+  .sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+  /* IGP Card */
+  .igp-card {
+    background: linear-gradient(160deg, var(--navy), var(--royal));
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    text-decoration: none;
+  }
+  .igp-header {
+    background: var(--gold);
+    padding: 10px 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--navy);
+  }
+  .igp-body { padding: 24px 20px; text-align: center; }
+  .igp-avatar {
+    width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 14px;
+    background: radial-gradient(circle, rgba(200,168,75,0.3), rgba(10,22,40,0.8));
+    border: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+  }
+  .igp-body h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white); font-size: 15px; font-weight: 700; line-height: 1.3;
+  }
+  .igp-body .title { color: var(--gold); font-size: 12px; margin-top: 4px; }
+  .igp-cta {
+    display: inline-block; margin-top: 14px;
+    border: 1px solid var(--gold); color: var(--gold);
+    padding: 6px 18px; border-radius: 3px; font-size: 12px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .igp-cta:hover { background: var(--gold); color: var(--navy); }
+
+  /* Related Links */
+  .sidebar-card {
+    background: var(--white); border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .sidebar-card-hd {
+    background: var(--navy); color: var(--gold);
+    padding: 12px 20px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .related-list { padding: 8px 0; }
+  .related-list a {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    font-size: 13px; color: var(--navy);
+    text-decoration: none; border-bottom: 1px solid #f0f0f0;
+    transition: all 0.15s;
+  }
+  .related-list a:last-child { border-bottom: none; }
+  .related-list a:hover { background: #f8f6f0; color: var(--royal); padding-left: 26px; }
+  .related-list a::before {
+    content: '›'; color: var(--gold); font-size: 18px; font-weight: 700;
+  }
+
+  /* Contact sidebar */
+  .contact-card {
+    background: var(--navy); border-radius: 8px;
+    padding: 20px;
+    color: white;
+  }
+  .contact-card h3 {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; margin-bottom: 14px;
+    border-bottom: 1px solid rgba(200,168,75,0.3); padding-bottom: 10px;
+  }
+  .contact-item { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .contact-item .ico { font-size: 16px; flex-shrink: 0; }
+  .contact-item span { color: rgba(255,255,255,0.8); line-height: 1.4; }
+  .social-row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .social-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(200,168,75,0.3);
+    color: rgba(255,255,255,0.8);
+    padding: 6px 10px; border-radius: 3px;
+    font-size: 11px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s; letter-spacing: 0.05em;
+  }
+  .social-btn:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 3px solid var(--gold);
+    color: rgba(255,255,255,0.65);
+    padding: 40px 0 20px;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    max-width: 1280px; margin: auto; padding: 0 32px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+  }
+  footer h4 { color: var(--gold); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
+  footer p { font-size: 13px; line-height: 1.7; }
+  footer a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13px; display: block; margin-bottom: 8px; }
+  footer a:hover { color: var(--gold); }
+  .footer-bottom {
+    max-width: 1280px; margin: 30px auto 0; padding: 20px 32px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px;
+  }
+  .scroll-top {
+    position: fixed; bottom: 28px; right: 28px;
+    background: var(--gold); color: var(--navy);
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; cursor: pointer; text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.2s; border: none;
+  }
+  .scroll-top:hover { background: var(--gold-light); transform: translateY(-3px); }
+
+  @media (max-width: 900px) {
+    .quick-links { grid-template-columns: repeat(3, 1fr); }
+    .main-grid { grid-template-columns: 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .header-inner { flex-wrap: wrap; }
+    .header-right { width: 100%; flex-direction: row; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="inner">
+    <span>🇱🇰 Official Website of Sri Lanka Police | <a href="#">Sinhala</a> | <a href="#">Tamil</a></span>
+    <span>Emergency: <a href="tel:119"><strong>119</strong></a> &nbsp;|&nbsp; Headquarters: <a href="tel:+94112421111">+94 11 242 1111</a></span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-emblem">🛡️</div>
+    <div class="header-text">
+      <h1>Sri Lanka Police</h1>
+      <div class="sub">Serving with Honour · Protecting with Pride</div>
+      <div class="sinhala">ශ්‍රී ලංකා පොලිස් | இலங்கை பொலிஸ்</div>
+    </div>
+    <div class="header-right">
+      <a href="tel:119" class="emergency-btn">🚨 Emergency: 119</a>
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button>🔍</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="active">Home</a>
+      <div class="nav-dropdown">
+        <a href="#">About Us ▾</a>
+        <div class="dropdown-menu">
+          <a href="#">History & Mission</a>
+          <a href="#">Inspector General</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#">Divisions ▾</a>
+        <div class="dropdown-menu">
+          <a href="#">Criminal Investigation</a>
+          <a href="#">Traffic Police</a>
+          <a href="#">Special Task Force</a>
+          <a href="#">Narcotics Bureau</a>
+          <a href="#">Women & Children</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#">Downloads ▾</a>
+        <div class="dropdown-menu">
+          <a href="#">Annual Reports</a>
+          <a href="#">Forms & Applications</a>
+          <a href="#">Circulars</a>
+          <a href="#">Statistics</a>
+          <a href="#">Gazettes</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#">Library ▾</a>
+        <div class="dropdown-menu">
+          <a href="#">Publications</a>
+          <a href="#">Research</a>
+          <a href="#">Law References</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#">Survey ▾</a>
+        <div class="dropdown-menu">
+          <a href="#">Public Satisfaction</a>
+          <a href="#">Crime Statistics</a>
+          <a href="#">Service Feedback</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- NEWS TICKER -->
+<div class="hero-strip">
+  <span class="label">📢 News</span>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>17th Anniversary of Victory Day Commemoration — We Salute Our Heroes</span>
+      <span>Vietnam People's Police Academy & National Police Training Institute Sign MOU</span>
+      <span>Minister and IGP Meet Police Officers in the Puttalam District</span>
+      <span>Traffic arrangements for the 17th National War Heroes' Commemoration Ceremony</span>
+      <span>Sri Lanka Police's First International Research Conference to Receive Extensive Media Coverage</span>
+      <span>17th Anniversary of Victory Day Commemoration — We Salute Our Heroes</span>
+      <span>Vietnam People's Police Academy & National Police Training Institute Sign MOU</span>
+      <span>Minister and IGP Meet Police Officers in the Puttalam District</span>
+      <span>Traffic arrangements for the 17th National War Heroes' Commemoration Ceremony</span>
+      <span>Sri Lanka Police's First International Research Conference to Receive Extensive Media Coverage</span>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quick-links">
+  <a href="https://www.police.lk/?page_id=647" class="ql-card">
+    <div class="ql-icon">🖥️</div>
+    <h3>E-Services</h3>
+    <p>Clearance Reports & Complaints</p>
+  </a>
+  <a href="https://www.police.lk/?page_id=657" class="ql-card">
+    <div class="ql-icon">📰</div>
+    <h3>Media</h3>
+    <p>Press Releases & News Updates</p>
+  </a>
+  <a href="https://www.police.lk/?page_id=655" class="ql-card">
+    <div class="ql-icon">🖼️</div>
+    <h3>Gallery</h3>
+    <p>Image & Video Collection</p>
+  </a>
+  <a href="https://www.police.lk/?page_id=495" class="ql-card">
+    <div class="ql-icon">📞</div>
+    <h3>Contact Us</h3>
+    <p>Telephone, Police Stations & More</p>
+  </a>
+  <a href="https://www.police.lk/?page_id=2170" class="ql-card">
+    <div class="ql-icon">🎖️</div>
+    <h3>Join Us</h3>
+    <p>Become a Guardian of Peace</p>
+  </a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-grid">
+
+  <!-- LEFT COLUMN -->
+  <div>
+    <!-- Special Events -->
+    <div class="section-hd">
+      <span class="badge">Latest</span>
+      <h2>Special Events</h2>
+    </div>
+    <div class="news-grid">
+      <a href="https://www.police.lk/?p=23642" class="news-card">
+        <div class="news-img">🏅</div>
+        <div class="news-body">
+          <span class="news-tag">Victory Day</span>
+          <h4>17th Anniversary of the Victory Day Commemoration</h4>
+        </div>
+      </a>
+      <a href="https://www.police.lk/?p=23495" class="news-card">
+        <div class="news-img">🎖️</div>
+        <div class="news-body">
+          <span class="news-tag">Tribute</span>
+          <h4>We Salute Our Heroes</h4>
+        </div>
+      </a>
+      <a href="https://www.police.lk/?p=23488" class="news-card">
+        <div class="news-img">🤝</div>
+        <div class="news-body">
+          <span class="news-tag">Community</span>
+          <h4>Minister and IGP Meet Police Officers in Puttalam District</h4>
+        </div>
+      </a>
+      <a href="https://www.police.lk/?p=23427" class="news-card">
+        <div class="news-img">✍️</div>
+        <div class="news-body">
+          <span class="news-tag">International</span>
+          <h4>Vietnam People's Police Academy and NPTI Sign MOU</h4>
+        </div>
+      </a>
+    </div>
+
+    <!-- Notable Services -->
+    <div class="section-hd">
+      <span class="badge">Services</span>
+      <h2>Notable Services</h2>
+    </div>
+    <div class="service-list">
+      <a href="https://www.police.lk/?p=23503" class="service-item">
+        <div class="service-num">1</div>
+        <p>Traffic Arrangements for the 17th National War Heroes' Commemoration Ceremony</p>
+      </a>
+      <a href="https://www.police.lk/?p=23392" class="service-item">
+        <div class="service-num">2</div>
+        <p>Sri Lanka Police's First International Research Conference to Receive Extensive Media Coverage</p>
+      </a>
+      <a href="https://www.police.lk/?p=23370" class="service-item">
+        <div class="service-num">3</div>
+        <p>Polluted Crow Island Beach Cleaned Through Intervention of the Environmental Protection Division</p>
+      </a>
+      <a href="https://www.police.lk/?p=23348" class="service-item">
+        <div class="service-num">4</div>
+        <p>Police Health and Welfare Scheme Expanded to Enhance Benefits for Police Officers</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- IGP -->
+    <div class="igp-card">
+      <div class="igp-header">Inspector General of Police</div>
+      <div class="igp-body">
+        <div class="igp-avatar">👮</div>
+        <h3>Attorney-at-Law<br>Mr. Priyantha Weerasooriya</h3>
+        <div class="title">Inspector General of Police</div>
+        <a href="https://www.police.lk/?page_id=12731" class="igp-cta">View Profile →</a>
+      </div>
+    </div>
+
+    <!-- Related Links -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-hd">Related Links</div>
+      <div class="related-list">
+        <a href="https://www.presidentsoffice.gov.lk/" target="_blank">Presidential Secretariat</a>
+        <a href="https://www.pubsec.gov.lk/" target="_blank">Ministry of Public Security & Parliamentary Affairs</a>
+        <a href="https://www.immigration.gov.lk/" target="_blank">Department of Immigration & Emigration</a>
+        <a href="https://drp.gov.lk/" target="_blank">Department of Registration of Persons</a>
+        <a href="https://www.nddcb.gov.lk/" target="_blank">National Dangerous Drugs Control Board</a>
+        <a href="https://npa.gov.lk/" target="_blank">National Police Academy</a>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-card">
+      <h3>📍 Contact Us</h3>
+      <div class="contact-item"><span class="ico">🏛️</span><span>Police Headquarters, Colombo 02, Sri Lanka.</span></div>
+      <div class="contact-item"><span class="ico">📞</span><span>(+94) 11 2421111</span></div>
+      <div class="contact-item"><span class="ico">📠</span><span>(+94) 11-2440584</span></div>
+      <div class="contact-item"><span class="ico">🚨</span><span><strong style="color:var(--gold)">Emergency: 119</strong></span></div>
+      <div class="social-row">
+        <a href="https://www.facebook.com/people/Sri-Lanka-Police/100064256130301/" target="_blank" class="social-btn">Facebook</a>
+        <a href="https://www.tiktok.com/@sri_lanka_police" target="_blank" class="social-btn">TikTok</a>
+        <a href="https://www.youtube.com/@Sri_Lanka_police" target="_blank" class="social-btn">YouTube</a>
+        <a href="https://www.instagram.com/sri_lanka_police/" target="_blank" class="social-btn">Instagram</a>
+        <a href="https://www.linkedin.com/in/sri-lanka-police-90a31727b" target="_blank" class="social-btn">LinkedIn</a>
+        <a href="https://x.com/SL_PoliceMedia" target="_blank" class="social-btn">𝕏 Twitter</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Sri Lanka Police</h4>
+      <p>Sri Lanka Police is dedicated to maintaining law and order, preventing and detecting crime, and serving the people of Sri Lanka with honour and integrity. We are committed to building a safer nation through professionalism, accountability, and community partnership.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Divisions</a>
+      <a href="#">E-Services</a>
+      <a href="#">Gallery</a>
+      <a href="#">Join Us</a>
+    </div>
+    <div>
+      <h4>Downloads</h4>
+      <a href="#">Annual Reports</a>
+      <a href="#">Forms</a>
+      <a href="#">Circulars</a>
+      <a href="#">Statistics</a>
+      <a href="#">Gazettes</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Sri Lanka Police. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Disclaimer</a></span>
+    <span>Designed & Maintained by Sri Lanka Police IT Division</span>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</body>
+</html>
